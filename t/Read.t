@@ -1,7 +1,7 @@
 #!/usr/local/bin/perl -w
 print "1..1\n";
 use Tk;
-require Tk::JPEG;
+require Tk::JPEG::Lite;
 
 my $file = (@ARGV) ? shift : 't/testimg.jpg';
 

@@ -9,8 +9,8 @@ my @writeopt = ([],[-grayscale],[-progressive],[-quality => 13],[-smooth => 12])
 
 plan tests => 7*@writeopt+6;
 
-eval { require Tk::JPEG };
-ok($@,'',"Cannot load Tk::JPEG");
+eval { require Tk::JPEG::Lite };
+ok($@,'',"Cannot load Tk::JPEG::Lite");
 
 my $file = (@ARGV) ? shift : 't/testimg.jpg';
 
