@@ -1,7 +1,12 @@
 #!/usr/local/bin/perl -w
 use strict;
 use Tk;
-use Tk::JPEG;
+BEGIN {
+    if (!eval { require Tk::JPEG::Lite }) {
+	eval { require Tk::JPEG };
+	die $@ if $@;
+    }
+}
 use Getopt::Std;
 eval { require Tk::PNG; };
 
