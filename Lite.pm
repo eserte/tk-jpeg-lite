@@ -6,7 +6,7 @@ require Tk::Photo;
 require DynaLoader;
 
 use vars qw($VERSION $XS_VERSION);
-$VERSION = '2.01402'; # $Id: Lite.pm,v 1.3 2002/07/12 12:20:46 eserte Exp $
+$VERSION = '2.01402'; # $Id: Lite.pm,v 1.4 2003/02/01 11:11:39 eserte Exp $
 
 @ISA = qw(DynaLoader);
 
@@ -37,7 +37,7 @@ This is a version of Tk::JPEG using a shared library.
 
 Nick Ing-Simmons E<lt>nick@ni-s.u-net.comE<gt>
 
-Stripped down to the lite version by Slaven Rezic E<lt>slaven.rezic@berlin.deE<gt>
+Stripped down to the lite version by Slaven Rezic E<lt>slaven@rezic.deE<gt>
 
 =cut
 
