@@ -6,7 +6,7 @@ require Tk::Photo;
 require DynaLoader;
 
 use vars qw($VERSION $XS_VERSION);
-$VERSION = '2.014'; # $Id: Lite.pm,v 1.1 2002/04/16 00:22:03 eserte Exp $
+$VERSION = '2.01401'; # $Id: Lite.pm,v 1.2 2002/04/16 00:56:41 eserte Exp $
 
 @ISA = qw(DynaLoader);
 
@@ -31,15 +31,13 @@ Tk::JPEG::Lite - lite JPEG loader for Tk::Photo
 
 =head1 DESCRIPTION
 
-This is an extension for Tk800.015 and later which supplies
-JPEG format loader for Photo image type.
-
-JPEG access is via release 5 of the The Independent JPEG Group's (IJG)
-free JPEG software.
+This is a version of Tk::JPEG using a shared library.
 
 =head1 AUTHOR
 
 Nick Ing-Simmons E<lt>nick@ni-s.u-net.comE<gt>
+
+Stripped down to the lite version by Slaven Rezic E<lt>slaven.rezic@berlin.deE<gt>
 
 =cut
 
