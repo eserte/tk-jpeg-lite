@@ -61,6 +61,10 @@
 #undef EXTERN
 
 /* libjpeg */
+#ifdef __CYGWIN__
+#define INT32 _INT32
+#endif
+
 #ifdef MAC_TCL
 #  include "libjpeg:jpeglib.h"
 #  include "libjpeg:jerror.h"
@@ -87,11 +91,21 @@
  * The format record for the JPEG file format:
  */
 
+#if TK_MAJOR_VERSION == 8 && TK_MINOR_VERSION == 0
 static int	ChnMatchJPEG _ANSI_ARGS_((Tcl_Interp *interp, Tcl_Channel chan,
 		    Tcl_Obj *fileName,
 		    Tcl_Obj *format, int *widthPtr, int *heightPtr));
 static int	ObjMatchJPEG _ANSI_ARGS_((Tcl_Interp *interp, Tcl_Obj *data,
 		    Tcl_Obj *format, int *widthPtr, int *heightPtr));
+#else
+static int	ChnMatchJPEG _ANSI_ARGS_((Tcl_Channel chan,
+		    Tcl_Obj *fileName,
+		    Tcl_Obj *format, int *widthPtr, int *heightPtr,
+		    Tcl_Interp *interp ));
+static int	ObjMatchJPEG _ANSI_ARGS_((Tcl_Obj *data,
+		    Tcl_Obj *format, int *widthPtr, int *heightPtr,
+		    Tcl_Interp *interp));
+#endif
 static int	ChnReadJPEG _ANSI_ARGS_((Tcl_Interp *interp,
 		    Tcl_Channel chan, Tcl_Obj *fileName, Tcl_Obj *format,
 		    Tk_PhotoHandle imageHandle, int destX, int destY,
@@ -639,7 +653,11 @@ Imgjpeg_write_scanlines(a,b,c)
  */
 
 static int
+#if TK_MAJOR_VERSION == 8 && TK_MINOR_VERSION == 0
 ChnMatchJPEG(interp, chan, fileName, format, widthPtr, heightPtr)
+#else
+ChnMatchJPEG(chan, fileName, format, widthPtr, heightPtr, interp)
+#endif
     Tcl_Interp *interp;
     Tcl_Channel chan;		/* The image channel, open for reading. */
     Tcl_Obj *fileName;		/* The name of the image file. */
@@ -677,7 +695,11 @@ ChnMatchJPEG(interp, chan, fileName, format, widthPtr, heightPtr)
  */
 
 static int
+#if TK_MAJOR_VERSION == 8 && TK_MINOR_VERSION == 0
 ObjMatchJPEG(interp, data, format, widthPtr, heightPtr)
+#else
+ObjMatchJPEG(data, format, widthPtr, heightPtr, interp)
+#endif
     Tcl_Interp *interp;
     Tcl_Obj *data;		/* the object containing the image data */
     Tcl_Obj *format;		/* User-specified format object, or NULL. */
@@ -1053,7 +1075,15 @@ CommonReadJPEG(interp, cinfo, format, imageHandle, destX, destY,
     for (curY = 0; curY < stopY; curY++) {
       jpeg_read_scanlines(cinfo, buffer, 1);
       if (curY >= srcY) {
+#if TK_MAJOR_VERSION == 8 && TK_MINOR_VERSION == 0
 	Tk_PhotoPutBlock(imageHandle, &block, destX, outY, outWidth, 1);
+#else
+        /* This is like Tk_PhotoPutZoomedBlock_NoComposite
+           but reminds us that we could add support for compose
+         */
+	Tk_PhotoPutBlock(imageHandle, &block, destX, outY, outWidth, 1,
+          TK_PHOTO_COMPOSITE_OVERLAY);
+#endif
 	outY++;
       }
     }
