@@ -1,0 +1,12 @@
+Lite.pm
+Lite.xs
+MANIFEST
+MANIFEST.SKIP
+Makefile.PL
+Nick.jpg
+README
+imgJPEG.c
+t/Read.t
+t/more.t
+t/testimg.jpg
+tkjpeg
