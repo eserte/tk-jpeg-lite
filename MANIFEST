@@ -3,7 +3,6 @@ Lite.xs
 MANIFEST
 MANIFEST.SKIP
 Makefile.PL
-Nick.jpg
 README
 imgJPEG.c
 t/Read.t
