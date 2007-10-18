@@ -12,7 +12,13 @@ Tk::MMutil::TkExtMakefile(
     'DEFINE' => '-DHAVE_JPEGLIB_H',
     'XS_VERSION'   => $Tk::Config::VERSION,
     'dist'         => { COMPRESS => 'gzip -f9', SUFFIX => '.gz' },
-    'PREREQ_PM'    => {'Tk' => 0},
+    'PREREQ_PM'    => {'Tk' => 800.015 },
+    'EXTRA_META'   => <<'EOF',
+dynamic_config: 0
+build_requires:
+  Tk::MMutil: 0
+  Tk::Config: 0
+EOF
 );
 
 sub MY::postamble {
