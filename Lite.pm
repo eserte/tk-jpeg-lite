@@ -6,7 +6,7 @@ require Tk::Photo;
 require DynaLoader;
 
 use vars qw($VERSION $XS_VERSION);
-$VERSION = '2.014_04'; # $Id: Lite.pm,v 1.8 2007/10/22 19:26:12 eserte Exp $
+$VERSION = '2.014_04'; # $Id: Lite.pm,v 1.9 2007/10/22 19:31:35 eserte Exp $
 
 @ISA = qw(DynaLoader);
 
@@ -41,7 +41,7 @@ Stripped down to the lite version by Slaven Rezic E<lt>slaven@rezic.deE<gt>
 
 =head1 COPYRIGHT
 
-Copyright (C) 2002-2004 Slaven Rezic. All rights reserved. This
+Copyright (C) 2002-2004,2007 Slaven Rezic. All rights reserved. This
 package is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
 
