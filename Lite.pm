@@ -6,7 +6,7 @@ require Tk::Photo;
 require DynaLoader;
 
 use vars qw($VERSION $XS_VERSION);
-$VERSION = '2.014_04'; # $Id: Lite.pm,v 1.9 2007/10/22 19:31:35 eserte Exp $
+$VERSION = '2.014_05'; # $Id: Lite.pm,v 1.10 2007/10/23 23:11:36 eserte Exp $
 
 @ISA = qw(DynaLoader);
 
