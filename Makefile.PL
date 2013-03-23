@@ -28,7 +28,7 @@ Tk::MMutil::TkExtMakefile(
     'NAME'         => 'Tk::JPEG::Lite', 
     'INC'          => $INC,
     'LIBS'         => [$LIBS],
-    'EXE_FILES'    => ['tkjpeg'],
+    'EXE_FILES'    => ['tkjpeg-lite'],
     'PMLIBDIRS'    => [],
     'OBJECT'       => '$(O_FILES)',
     'VERSION_FROM' => 'Lite.pm',
