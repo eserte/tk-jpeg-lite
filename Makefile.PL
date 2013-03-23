@@ -18,7 +18,7 @@ if (!$eumm_recent_enough) {
     *MY::dist_core = sub {
         <<'EOF';
 dist :
-        $(NOECHO) $(ECHO) "Sorry, use a newer EUMM, at least version $min_eumm_version!"
+	$(NOECHO) $(ECHO) "Sorry, use a newer EUMM, at least version $min_eumm_version!"
 
 EOF
     };
@@ -39,6 +39,7 @@ Tk::MMutil::TkExtMakefile(
     ($eumm_recent_enough ?
       (META_MERGE => { resources => { repository => 'git://github.com/eserte/tk-jpeg-lite.git' },
 		       configure_requires => { 
+			   'Devel::CheckLib' => 0,
 			   'Tk::MMutil' => 0,
 			   'Tk::Config' => 0,
 		       }
