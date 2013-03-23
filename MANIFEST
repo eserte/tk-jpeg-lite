@@ -9,4 +9,4 @@ imgJPEG.c
 t/Read.t
 t/more.t
 t/testimg.jpg
-tkjpeg
+tkjpeg-lite

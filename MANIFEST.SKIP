@@ -10,4 +10,9 @@ blib/
 nick.jpg
 \bLite\.c$
 \bRCS\b
+\.git\b
 index.html
+MYMETA.json
+MYMETA.yml
+\.gitignore$
+\.prove$
