@@ -1,14 +1,26 @@
-#!/usr/local/bin/perl -w
-print "1..1\n";
+#!/usr/bin/perl -w
+
+use strict;
+use FindBin;
+use Test::More;
+
 use Tk;
-require Tk::JPEG::Lite;
+use Tk::JPEG::Lite;
 
-my $file = (@ARGV) ? shift : 't/testimg.jpg';
+my $file = (@ARGV) ? shift : "$FindBin::RealBin/testimg.jpg";
 
-my $mw = MainWindow->new;
+my $mw = eval { Tk::MainWindow->new() };
+if (!Tk::Exists($mw)) {
+    plan skip_all => "Cannot create MainWindow: $@";
+    CORE::exit(0);
+}
+
+plan tests => 1;
+
+$mw->geometry('+10+10');
 my $image = $mw->Photo('-format' => 'jpeg', -file => $file);
 $mw->Label(-image => $image)->pack;
+pass 'Loaded and display image';
 $mw->update;
-$mw->after(1000,[destroy => $mw]);
+$mw->after(500,[destroy => $mw]);
 MainLoop;
-print "ok 1\n";
