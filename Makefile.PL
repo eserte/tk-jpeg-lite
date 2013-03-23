@@ -1,3 +1,4 @@
+use ExtUtils::MakeMaker;
 use Tk::MMutil;
 use Tk::Config;
 
@@ -8,6 +9,19 @@ if (eval { require Devel::CheckLib; 1; }) {
     my(@libpath) = map { s/^-L//; $_ } grep { /^-L/ } split / /, $LIBS;
     my(@lib)     = map { s/^-l//; $_ } grep { /^-l/ } split / /, $LIBS;
     Devel::CheckLib::check_lib_or_exit(lib => \@lib, libpath => \@libpath);
+}
+
+$min_eumm_version = 6.58;
+$eumm_recent_enough = $ExtUtils::MakeMaker::VERSION >= $min_eumm_version;
+
+if (!$eumm_recent_enough) {
+    *MY::dist_core = sub {
+        <<'EOF';
+dist :
+        $(NOECHO) $(ECHO) "Sorry, use a newer EUMM, at least version $min_eumm_version!"
+
+EOF
+    };
 }
 
 Tk::MMutil::TkExtMakefile(
@@ -22,11 +36,13 @@ Tk::MMutil::TkExtMakefile(
     'XS_VERSION'   => $Tk::Config::VERSION,
     'dist'         => { COMPRESS => 'gzip -f9', SUFFIX => '.gz' },
     'PREREQ_PM'    => {'Tk' => 800.015 },
-    'EXTRA_META'   => <<'EOF',
-configure_requires:
-  Tk::MMutil: 0
-  Tk::Config: 0
-EOF
+    ($eumm_recent_enough ?
+      (META_MERGE => { resources => { repository => 'git://github.com/eserte/tk-jpeg-lite.git' },
+		       configure_requires => { 
+			   'Tk::MMutil' => 0,
+			   'Tk::Config' => 0,
+		       }
+       }) : ()),
 );
 
 sub MY::postamble {
@@ -36,7 +52,7 @@ sub MY::postamble {
 	$postamble .= <<'EOF';
 
 .include "../../perl.release.mk"
-.include "../../perl.cvs.mk"
+.include "../../perl.git.mk"
 
 EOF
     }
