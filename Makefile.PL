@@ -32,6 +32,7 @@ Tk::MMutil::TkExtMakefile(
     'PMLIBDIRS'    => [],
     'OBJECT'       => '$(O_FILES)',
     'VERSION_FROM' => 'Lite.pm',
+    'LICENSE'      => 'perl_5',
     'DEFINE' => '-DHAVE_JPEGLIB_H',
     'XS_VERSION'   => $Tk::Config::VERSION,
     'dist'         => { COMPRESS => 'gzip -f9', SUFFIX => '.gz' },
